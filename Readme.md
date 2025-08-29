@@ -55,8 +55,6 @@ void setup() {
 
 ## 処理の流れについて
 
-- 前述したタイマー割り込みによって`stateManager.update()`が呼ばれた後の動作について説明してあります
-
 #### プログラムスタート(main.cpp)
 
 1. `StateManager` のオブジェクト `stateManager` を作成
