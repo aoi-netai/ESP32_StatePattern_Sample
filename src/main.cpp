@@ -4,29 +4,29 @@
 #include "State/common/StateHeaders.hpp"
 
 // 状態管理クラスのインスタンスを作成（初期状態を指定する）
-StateManager stateManager(std::make_unique<StateA>());
+StateManager state_manager(std::make_unique<StateA>());
 
 // ループ管理クラスのインスタンスを作成
-LoopManager loopManager;
+LoopManager loop_manager;
 
 // ループ管理用のタイマー
-hw_timer_t* timer10Hz = nullptr;
+hw_timer_t* timer_10hz = nullptr;
 
 void LoopTimer();
 
 void setup() {
 
   // タイマー初期化（80Mhzを1Mhzに分周）
-  timer10Hz = timerBegin(0, 80, true);
+  timer_10hz = timerBegin(0, 80, true);
 
   // タイマーに割り込み関数を設定
-  timerAttachInterrupt(timer10Hz, &LoopTimer, true);
+  timerAttachInterrupt(timer_10hz, &LoopTimer, true);
 
   // 1Mhzのカウント * 100000回 = 10hz
-  timerAlarmWrite(timer10Hz, 100000, true);
+  timerAlarmWrite(timer_10hz, 100000, true);
 
   // タイマーの有効化
-  timerAlarmEnable(timer10Hz);
+  timerAlarmEnable(timer_10hz);
 }
 
 // StateManagerの呼び出し
@@ -34,13 +34,13 @@ void setup() {
 void loop() {
 
   // 待機フラグの確認
-  if(loopManager.GetWaitFlag() == false){
+  if (loop_manager.GetWaitFlag() == false) {
 
     // フラグをセット
-    loopManager.SetWaitFlag();
+    loop_manager.SetWaitFlag();
 
     // StateManagerの更新
-    stateManager.update();
+    state_manager.Update();
   }
 }
 
@@ -48,5 +48,5 @@ void loop() {
 void LoopTimer(){
 
   // 待機フラグのクリア
-  loopManager.ClearWaitFlag();
+  loop_manager.ClearWaitFlag();
 }

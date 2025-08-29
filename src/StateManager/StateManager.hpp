@@ -27,11 +27,11 @@ class StateManager {
         StateManager(std::unique_ptr<StateInterface> initialState);
         ~StateManager() = default;
 
-        // 状態遷移
-        void changeState(std::unique_ptr<StateInterface> newState);
+    // 状態遷移
+    void ChangeState(std::unique_ptr<StateInterface> newState);
         
-        // メインループ
-        void update();
+    // メインループ
+    void Update();
 
         // 各状態で使う変数など
         uint16_t state_change_count = 0;

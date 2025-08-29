@@ -21,28 +21,28 @@
 class StateA : public StateInterface {
 
     public:
-        void update(StateManager& manager) override;
-        void enter(StateManager& manager) override;
-        void exit(StateManager& manager) override;
-        const char* getStateName() const override { return "StateA"; }
+        void Update(StateManager& manager) override;
+        void Enter(StateManager& manager) override;
+        void Exit(StateManager& manager) override;
+        const char* GetStateName() const override { return "StateA"; }
 };
 
 class StateB : public StateInterface {
 
     public:
-        void update(StateManager& manager) override;
-        void enter(StateManager& manager) override;
-        void exit(StateManager& manager) override;
-        const char* getStateName() const override { return "StateB"; }
+        void Update(StateManager& manager) override;
+        void Enter(StateManager& manager) override;
+        void Exit(StateManager& manager) override;
+        const char* GetStateName() const override { return "StateB"; }
 };
 
 class StateC : public StateInterface {
 
     public:
-        void update(StateManager& manager) override;
-        void enter(StateManager& manager) override;
-        void exit(StateManager& manager) override;
-        const char* getStateName() const override { return "StateC"; }
+        void Update(StateManager& manager) override;
+        void Enter(StateManager& manager) override;
+        void Exit(StateManager& manager) override;
+        const char* GetStateName() const override { return "StateC"; }
 };
 
 #endif // STATEHEADERS_HPP

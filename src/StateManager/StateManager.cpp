@@ -12,39 +12,39 @@ StateManager::StateManager(std::unique_ptr<StateInterface> initialState) {
 
     // enter を呼ぶ
     if (current_state) {
-        current_state->enter(*this);
+        current_state->Enter(*this);
     }
 }
 
 // 状態遷移
-void StateManager::changeState(std::unique_ptr<StateInterface> new_state) {
+void StateManager::ChangeState(std::unique_ptr<StateInterface> new_state) {
 
     // 現在の状態の終了処理（exit関数の呼び出し）
     if (current_state) {
 
-        current_state->exit(*this);
+        current_state->Exit(*this);
     }
 
     // 新しい状態クラスのオブジェクトのポインタを代入
     current_state = std::move(new_state);
 
     // 新しい状態の開始処理（enter関数の呼び出し）
-    current_state->enter(*this);
+    current_state->Enter(*this);
 
     // 状態遷移メッセージの出力(デバッグ用)
     if (current_state) {
         
         // 状態遷移カウントと遷移先の状態を表示
-        printf("[StateManager] StateChange[%-4u]: %s\n", state_change_count, current_state->getStateName());
+    printf("[StateManager] StateChange[%-4u]: %s\n", state_change_count, current_state->GetStateName());
     }
 }
 
 // メインループの更新処理
-void StateManager::update() {
+void StateManager::Update() {
 
     if (current_state) {
 
         // 現在状態の更新処理
-        current_state->update(*this);
+    current_state->Update(*this);
     }
 }

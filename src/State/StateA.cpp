@@ -1,27 +1,25 @@
 #include "common/StateHeaders.hpp"
 #include "../StateManager/StateManager.hpp"
 
-void StateA::update(StateManager& manager) {
-    static uint16_t loopCounter = 0;
-    loopCounter++;
+void StateA::Update(StateManager& manager) {
+    static uint16_t loop_counter = 0;
+    loop_counter++;
 
-    if(loopCounter > 10){
+    if (loop_counter > 10) {
 
-        loopCounter = 0;
+        loop_counter = 0;
 
-        manager.state_change_count ++;
-        manager.changeState(std::make_unique<StateB>());
+    manager.state_change_count++;
+    manager.ChangeState(std::make_unique<StateB>());
 
         return;
     }
 }
 
-void StateA::enter(StateManager& manager) {
-
+void StateA::Enter(StateManager& manager) {
 
 }
 
-void StateA::exit(StateManager& manager) {
-
+void StateA::Exit(StateManager& manager) {
 
 }

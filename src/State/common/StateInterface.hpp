@@ -21,17 +21,17 @@ public:
 
     virtual ~StateInterface() = default;
 
-    // 状態更新用
-    virtual void update(StateManager& manager) = 0;
+        // 状態更新用
+        virtual void Update(StateManager& manager) = 0;
 
     // 状態に入るときの処理（起動や初期化など）
-    virtual void enter(StateManager& manager) {}
+        virtual void Enter(StateManager& manager) {}
 
     // 状態を出るときの処理（リセットやクリーンアップなど）
-    virtual void exit(StateManager& manager) {}
+        virtual void Exit(StateManager& manager) {}
 
     // 状態名の取得
-    virtual const char* getStateName() const = 0;
+        virtual const char* GetStateName() const = 0;
 };
 
 #endif /* INC_STATE_INTERFACE_HPP_ */
