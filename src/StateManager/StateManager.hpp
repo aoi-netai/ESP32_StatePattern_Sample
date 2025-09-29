@@ -18,28 +18,34 @@
 
 #include "../State/common/StateInterface.hpp"
 #include <memory>
+#include <atomic>
 
 // 状態管理クラス
 class StateManager {
 
     public:
 
-        StateManager(std::unique_ptr<StateInterface> initialState);
+        // コンストラクタ 初期状態を設定
+        StateManager();
+
+        // デストラクタ
         ~StateManager() = default;
 
-    // 状態遷移
-    void ChangeState(std::unique_ptr<StateInterface> newState);
-        
-    // メインループ
-    void Update();
+        // 状態遷移
+        void ChangeState(std::unique_ptr<StateInterface> newState);
+
+        void Init(std::unique_ptr<StateInterface> initialState);
+            
+        // メインループ
+        void Update();
 
         // 各状態で使う変数など
         uint16_t state_change_count = 0;
 
     private:
 
+        // 現在の状態を保持するポインタ
         std::unique_ptr<StateInterface> current_state;
-
 };
 
 // ループ管理クラス

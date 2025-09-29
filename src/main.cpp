@@ -4,7 +4,7 @@
 #include "State/common/StateHeaders.hpp"
 
 // 状態管理クラスのインスタンスを作成（初期状態を指定する）
-StateManager state_manager(std::make_unique<StateA>());
+StateManager state_manager;
 
 // ループ管理クラスのインスタンスを作成
 LoopManager loop_manager;
@@ -27,6 +27,9 @@ void setup() {
 
   // タイマーの有効化
   timerAlarmEnable(timer_10hz);
+
+  // 最初の状態の呼び出し
+  state_manager.Init(std::make_unique<StateA>()); 
 }
 
 // StateManagerの呼び出し
@@ -45,7 +48,8 @@ void loop() {
 }
 
 // 10Hzで呼び出されるタイマー割り込み関数
-void LoopTimer(){
+// 高速なIRAM上に配置する
+void IRAM_ATTR LoopTimer(){
 
   // 待機フラグのクリア
   loop_manager.ClearWaitFlag();

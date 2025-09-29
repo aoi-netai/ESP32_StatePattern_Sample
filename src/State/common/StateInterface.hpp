@@ -1,4 +1,4 @@
-/* StateInterface.cpp
+/* StateInterface.hpp
 * 
 * 各状態のインターフェース（基底クラス）を定義しています
 * ここで定義されている仮想関数をすべての状態クラスで実装する必要があります（純粋仮想関数はすべてをoverrideしないとコンパイルエラーになります）
@@ -17,20 +17,21 @@ class StateManager;
 
 // ステートのインターフェース（抽象基底クラス）
 class StateInterface {
-public:
 
-    virtual ~StateInterface() = default;
+    public:
+
+        virtual ~StateInterface() = default;
 
         // 状態更新用
         virtual void Update(StateManager& manager) = 0;
 
-    // 状態に入るときの処理（起動や初期化など）
+        // 状態に入るときの処理（起動や初期化など）
         virtual void Enter(StateManager& manager) {}
 
-    // 状態を出るときの処理（リセットやクリーンアップなど）
+        // 状態を出るときの処理（リセットやクリーンアップなど）
         virtual void Exit(StateManager& manager) {}
 
-    // 状態名の取得
+        // 状態名の取得
         virtual const char* GetStateName() const = 0;
 };
 

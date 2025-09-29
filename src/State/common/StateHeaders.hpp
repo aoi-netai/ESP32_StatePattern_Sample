@@ -1,4 +1,4 @@
-/* StateHeaders.cpp
+/* StateHeaders.hpp
 * 
 *  各状態のヘッダーファイルをまとめたもの
 *  通常はStateA.hpp/StateA.cppの2つを作るが、StateA.hppは短いので、StateAからStateCのヘッダーをここでまとめて宣言している
