@@ -1,7 +1,7 @@
 #include "common/StateHeaders.hpp"
 #include "../StateManager/StateManager.hpp"
 
-void StateB::Update(StateManager& manager) {
+StateID StateB::Update(StateManager& manager) {
     static uint16_t loop_counter = 0;
     loop_counter++;
 
@@ -10,10 +10,11 @@ void StateB::Update(StateManager& manager) {
         loop_counter = 0;
 
     manager.state_change_count++;
-    manager.ChangeState(std::make_unique<StateC>());
 
-        return;
+        return StateID::STATE_C;
     }
+
+    return StateID::STATE_B;
 }
 
 void StateB::Enter(StateManager& manager) {

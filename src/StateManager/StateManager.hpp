@@ -44,6 +44,9 @@ class StateManager {
 
     private:
 
+        // 状態IDから状態クラスのオブジェクトを生成する関数
+        std::unique_ptr<StateInterface> CreateState(StateID state_id);
+
         // 現在の状態を保持するポインタ
         std::unique_ptr<StateInterface> current_state;
 };

@@ -18,31 +18,37 @@
 #include "StateInterface.hpp"
 #include <memory>
 
+enum class StateID {
+    STATE_A,
+    STATE_B,
+    STATE_C,
+};
+
 class StateA : public StateInterface {
 
     public:
-        void Update(StateManager& manager) override;
+        StateID Update(StateManager& manager) override;
         void Enter(StateManager& manager) override;
         void Exit(StateManager& manager) override;
-        const char* GetStateName() const override { return "StateA"; }
+        const StateID GetStateID() const override { return StateID::STATE_A; }
 };
 
 class StateB : public StateInterface {
 
     public:
-        void Update(StateManager& manager) override;
+        StateID Update(StateManager& manager) override;
         void Enter(StateManager& manager) override;
         void Exit(StateManager& manager) override;
-        const char* GetStateName() const override { return "StateB"; }
+        const StateID GetStateID() const override { return StateID::STATE_B; }
 };
 
 class StateC : public StateInterface {
 
     public:
-        void Update(StateManager& manager) override;
+        StateID Update(StateManager& manager) override;
         void Enter(StateManager& manager) override;
         void Exit(StateManager& manager) override;
-        const char* GetStateName() const override { return "StateC"; }
+        const StateID GetStateID() const override { return StateID::STATE_C; }
 };
 
 #endif // STATEHEADERS_HPP
