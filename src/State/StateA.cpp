@@ -2,6 +2,7 @@
 #include "../StateManager/StateManager.hpp"
 
 StateID StateA::Update(StateManager& manager) {
+    
     static uint16_t loop_counter = 0;
     loop_counter++;
 
@@ -11,7 +12,7 @@ StateID StateA::Update(StateManager& manager) {
 
         return StateID::STATE_B;
     }
-    
+
     return StateID::STATE_A;
 }
 

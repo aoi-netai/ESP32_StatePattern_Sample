@@ -2,6 +2,7 @@
 #include "../StateManager/StateManager.hpp"
 
 StateID StateB::Update(StateManager& manager) {
+    
     static uint16_t loop_counter = 0;
     loop_counter++;
 

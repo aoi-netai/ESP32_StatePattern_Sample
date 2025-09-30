@@ -29,7 +29,7 @@ void setup() {
   timerAlarmEnable(timer_10hz);
 
   // 最初の状態の呼び出し
-  state_manager.Init(std::make_unique<StateA>()); 
+  state_manager.Init(StateID::STATE_A); 
 }
 
 // StateManagerの呼び出し

@@ -30,11 +30,9 @@ class StateManager {
 
         // デストラクタ
         ~StateManager() = default;
-
-        // 状態遷移
-        void ChangeState(std::unique_ptr<StateInterface> newState);
-
-        void Init(std::unique_ptr<StateInterface> initialState);
+        
+        // 初期状態の設定
+        void Init(StateID init_state_id);
             
         // メインループ
         void Update();
@@ -43,6 +41,9 @@ class StateManager {
         uint16_t state_change_count = 0;
 
     private:
+
+        // 状態遷移
+        void ChangeState(std::unique_ptr<StateInterface> newState);
 
         // 状態IDから状態クラスのオブジェクトを生成する関数
         std::unique_ptr<StateInterface> CreateState(StateID state_id);

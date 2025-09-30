@@ -10,13 +10,14 @@ StateManager::StateManager() {
     
 }
 
-void StateManager::Init(std::unique_ptr<StateInterface> initialState) {
+void StateManager::Init(StateID init_state_id) {
 
     // 移入された状態を current_state に設定
-    current_state = std::move(initialState);
+    current_state = CreateState(init_state_id);
 
     // enter を呼ぶ
     if (current_state) {
+
         current_state->Enter(*this);
     }
 }
@@ -60,6 +61,7 @@ void StateManager::Update() {
     }
 }
 
+// 状態IDから状態クラスのオブジェクトを生成
 std::unique_ptr<StateInterface> StateManager::CreateState(StateID state_id) {
 
     switch (state_id) {
