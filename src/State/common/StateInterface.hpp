@@ -14,6 +14,7 @@
 
 // 前方宣言
 enum class StateID;
+struct StateContext;
 class StateManager;
 
 // ステートのインターフェース（抽象基底クラス）
@@ -24,13 +25,13 @@ class StateInterface {
         virtual ~StateInterface() = default;
 
         // 状態更新用
-        virtual StateID Update(StateManager& manager) = 0;
+        virtual StateID Update(StateContext& context) = 0;
 
         // 状態に入るときの処理（起動や初期化など）
-        virtual void Enter(StateManager& manager) {}
+        virtual void Enter(StateContext& context) {}
 
         // 状態を出るときの処理（リセットやクリーンアップなど）
-        virtual void Exit(StateManager& manager) {}
+        virtual void Exit(StateContext& context) {}
 
         // 状態IDの取得
         virtual const StateID GetStateID() const = 0;
