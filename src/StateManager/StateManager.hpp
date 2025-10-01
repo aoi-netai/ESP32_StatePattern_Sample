@@ -20,32 +20,36 @@
 #include <memory>
 #include <atomic>
 
+#include "../State/common/StateContext.hpp"
+#include "../State/common/StateID.hpp"
+
 // 状態管理クラス
 class StateManager {
 
     public:
 
         // コンストラクタ 初期状態を設定
-        StateManager();
+        StateManager(StateID init_state_id);
 
         // デストラクタ
         ~StateManager() = default;
-
-        // 状態遷移
-        void ChangeState(std::unique_ptr<StateInterface> newState);
-
-        void Init(std::unique_ptr<StateInterface> initialState);
             
         // メインループ
         void Update();
 
-        // 各状態で使う変数など
-        uint16_t state_change_count = 0;
-
     private:
+
+        // 状態遷移
+        void ChangeState(std::unique_ptr<StateInterface> newState);
+
+        // 状態IDから状態クラスのオブジェクトを生成する関数
+        std::unique_ptr<StateInterface> CreateState(StateID state_id);
 
         // 現在の状態を保持するポインタ
         std::unique_ptr<StateInterface> current_state;
+
+        // StateContext をオブジェクトとして保持し、各状態処理に参照で渡す
+        StateContext state_context;
 };
 
 // ループ管理クラス

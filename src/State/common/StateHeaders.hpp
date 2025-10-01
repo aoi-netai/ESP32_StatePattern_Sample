@@ -16,33 +16,33 @@
 #define STATEHEADERS_HPP
 
 #include "StateInterface.hpp"
-#include <memory>
+#include "StateID.hpp"
 
 class StateA : public StateInterface {
 
     public:
-        void Update(StateManager& manager) override;
-        void Enter(StateManager& manager) override;
-        void Exit(StateManager& manager) override;
-        const char* GetStateName() const override { return "StateA"; }
+        StateID Update(StateContext& context) override;
+        void Enter(StateContext& context) override;
+        void Exit(StateContext& context) override;
+        const StateID GetStateID() const override { return StateID::STATE_A; }
 };
 
 class StateB : public StateInterface {
 
     public:
-        void Update(StateManager& manager) override;
-        void Enter(StateManager& manager) override;
-        void Exit(StateManager& manager) override;
-        const char* GetStateName() const override { return "StateB"; }
+        StateID Update(StateContext& context) override;
+        void Enter(StateContext& context) override;
+        void Exit(StateContext& context) override;
+        const StateID GetStateID() const override { return StateID::STATE_B; }
 };
 
 class StateC : public StateInterface {
 
     public:
-        void Update(StateManager& manager) override;
-        void Enter(StateManager& manager) override;
-        void Exit(StateManager& manager) override;
-        const char* GetStateName() const override { return "StateC"; }
+        StateID Update(StateContext& context) override;
+        void Enter(StateContext& context) override;
+        void Exit(StateContext& context) override;
+        const StateID GetStateID() const override { return StateID::STATE_C; }
 };
 
 #endif // STATEHEADERS_HPP

@@ -1,24 +1,26 @@
 #include "common/StateHeaders.hpp"
 #include "../StateManager/StateManager.hpp"
 
-void StateB::Update(StateManager& manager) {
+StateID StateB::Update(StateContext& context) {
+    
     static uint16_t loop_counter = 0;
     loop_counter++;
 
     if (loop_counter > 10) {
 
         loop_counter = 0;
+        
+        context.state_change_count++;
 
-    manager.state_change_count++;
-    manager.ChangeState(std::make_unique<StateC>());
-
-        return;
+        return StateID::STATE_C;
     }
+
+    return StateID::STATE_B;
 }
 
-void StateB::Enter(StateManager& manager) {
+void StateB::Enter(StateContext& context) {
 
 }
-void StateB::Exit(StateManager& manager) {
+void StateB::Exit(StateContext& context) {
 
 }
