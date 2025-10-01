@@ -20,13 +20,8 @@
 #include <memory>
 #include <atomic>
 
-struct StateContext{
-
-    // ここに状態間で共有する変数を定義する
-    // 例: センサーデータ、タイマー、フラグなど
-
-    uint16_t state_change_count = 0;
-};
+#include "../State/common/StateContext.hpp"
+#include "../State/common/StateID.hpp"
 
 // 状態管理クラス
 class StateManager {
@@ -34,13 +29,10 @@ class StateManager {
     public:
 
         // コンストラクタ 初期状態を設定
-        StateManager();
+        StateManager(StateID init_state_id);
 
         // デストラクタ
         ~StateManager() = default;
-
-        // 初期状態の設定
-        void Init(StateID init_state_id);
             
         // メインループ
         void Update();
@@ -56,7 +48,8 @@ class StateManager {
         // 現在の状態を保持するポインタ
         std::unique_ptr<StateInterface> current_state;
 
-        StateContext* state_context;
+        // StateContext をオブジェクトとして保持し、各状態処理に参照で渡す
+        StateContext state_context;
 };
 
 // ループ管理クラス

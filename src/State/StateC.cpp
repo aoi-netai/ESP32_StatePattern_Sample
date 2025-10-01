@@ -9,7 +9,7 @@ StateID StateC::Update(StateContext& context) {
     if (loop_counter > 10) {
 
         loop_counter = 0;
-        context.state_change_count++;
+    context.state_change_count++;
 
         return StateID::STATE_A;
     }

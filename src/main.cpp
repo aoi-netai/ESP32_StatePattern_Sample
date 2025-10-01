@@ -4,7 +4,7 @@
 #include "State/common/StateHeaders.hpp"
 
 // 状態管理クラスのインスタンスを作成（初期状態を指定する）
-StateManager state_manager;
+StateManager state_manager(StateID::STATE_A);
 
 // ループ管理クラスのインスタンスを作成
 LoopManager loop_manager;
@@ -28,8 +28,6 @@ void setup() {
   // タイマーの有効化
   timerAlarmEnable(timer_10hz);
 
-  // 最初の状態の呼び出し
-  state_manager.Init(StateID::STATE_A); 
 }
 
 // StateManagerの呼び出し

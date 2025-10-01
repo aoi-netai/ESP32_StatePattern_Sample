@@ -5,12 +5,7 @@
 #include <memory>
 
 // コンストラクタ
-StateManager::StateManager() {
-
-    
-}
-
-void StateManager::Init(StateID init_state_id) {
+StateManager::StateManager(StateID init_state_id) {
 
     // 移入された状態を current_state に設定
     current_state = CreateState(init_state_id);
@@ -18,17 +13,17 @@ void StateManager::Init(StateID init_state_id) {
     // enter を呼ぶ
     if (current_state) {
 
-        current_state->Enter(&state_context);
+        current_state->Enter(state_context);
     }
+  
 }
-
 // 状態遷移
 void StateManager::ChangeState(std::unique_ptr<StateInterface> new_state) {
 
     // 現在の状態の終了処理（exit関数の呼び出し）
     if (current_state) {
 
-        current_state->Exit(state_context);
+    current_state->Exit(state_context);
     }
 
     // 新しい状態クラスのオブジェクトのポインタを代入
@@ -37,11 +32,11 @@ void StateManager::ChangeState(std::unique_ptr<StateInterface> new_state) {
     // 新しい状態の開始処理（enter関数の呼び出し）
     if (current_state) {
 
-        current_state->Enter(state_context);
+    current_state->Enter(state_context);
 
         // 状態遷移メッセージの出力(デバッグ用)
         // 状態遷移カウントと遷移先の状態を表示
-        printf("[StateManager] StateChange[%d]: %d\n", state_context.state_change_count, static_cast<int>(current_state->GetStateID()));
+    printf("[StateManager] StateChange[%d]: %d\n", state_context.state_change_count, static_cast<int>(current_state->GetStateID()));
     }
 }
 
@@ -51,7 +46,7 @@ void StateManager::Update() {
     if (current_state) {
 
         // 現在状態の更新処理
-        StateID next_state = current_state->Update(state_context);
+    StateID next_state = current_state->Update(state_context);
 
         // 状態遷移が発生した場合
         if (next_state != current_state->GetStateID()) {

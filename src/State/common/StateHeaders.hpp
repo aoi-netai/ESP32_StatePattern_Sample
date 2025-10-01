@@ -16,13 +16,7 @@
 #define STATEHEADERS_HPP
 
 #include "StateInterface.hpp"
-#include <memory>
-
-enum class StateID {
-    STATE_A,
-    STATE_B,
-    STATE_C,
-};
+#include "StateID.hpp"
 
 class StateA : public StateInterface {
 
