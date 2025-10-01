@@ -1,8 +1,7 @@
 #include "common/StateHeaders.hpp"
-#include "../StateManager/StateManager.hpp"
 
 StateID StateC::Update(StateContext& context) {
-    
+
     static uint16_t loop_counter = 0;
     loop_counter++;
 

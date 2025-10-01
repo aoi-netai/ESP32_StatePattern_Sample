@@ -2,7 +2,6 @@
 #include "../State/common/StateHeaders.hpp"
 
 #include <Arduino.h>
-#include <memory>
 
 // コンストラクタ
 StateManager::StateManager(StateID init_state_id) {

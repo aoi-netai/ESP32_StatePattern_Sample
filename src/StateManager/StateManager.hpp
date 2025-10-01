@@ -8,10 +8,8 @@
 #ifndef STATE_MANAGER_HPP
 #define STATE_MANAGER_HPP
 
-#include "../State/common/StateInterface.hpp"
 #include <memory>
-#include <atomic>
-
+#include "../State/common/StateInterface.hpp"
 #include "../State/common/StateContext.hpp"
 #include "../State/common/StateID.hpp"
 

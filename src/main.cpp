@@ -1,7 +1,5 @@
 #include <Arduino.h>
-#include <memory>
 #include "StateManager/StateManager.hpp"
-#include "State/common/StateHeaders.hpp"
 
 // 状態管理クラスのインスタンスを作成（初期状態を指定する）
 StateManager state_manager(StateID::STATE_A);

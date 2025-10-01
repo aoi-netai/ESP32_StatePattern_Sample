@@ -1,5 +1,4 @@
 #include "common/StateHeaders.hpp"
-#include "../StateManager/StateManager.hpp"
 
 StateID StateA::Update(StateContext& context) {
 
