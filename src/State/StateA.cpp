@@ -6,6 +6,7 @@ StateID StateA::Update(StateContext& context) {
     static uint16_t loop_counter = 0;
     loop_counter++;
 
+    // 10回ループしたら状態をBに変更
     if (loop_counter > 10) {
 
         loop_counter = 0;

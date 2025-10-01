@@ -1,15 +1,16 @@
 #include "common/StateHeaders.hpp"
 #include "../StateManager/StateManager.hpp"
 
-
 StateID StateC::Update(StateContext& context) {
+    
     static uint16_t loop_counter = 0;
     loop_counter++;
 
+    // 10回ループしたら状態をAに変更
     if (loop_counter > 10) {
 
         loop_counter = 0;
-    context.state_change_count++;
+        context.state_change_count++;
 
         return StateID::STATE_A;
     }
