@@ -12,14 +12,12 @@
 #ifndef INC_STATE_INTERFACE_HPP_
 #define INC_STATE_INTERFACE_HPP_
 
-// StateID を分離したヘッダから取り込む
-#include "StateID.hpp"
-
+#include "StateUtility.hpp"
 #include "StateContext.hpp"
 
 class StateManager;
 
-// ステートのインターフェース（抽象基底クラス）
+// ステートのインターフェース
 class StateInterface {
 
     public:
@@ -27,16 +25,16 @@ class StateInterface {
     virtual ~StateInterface() = default;
 
     // 状態更新用
-    virtual StateID Update(StateContext& context) = 0;
+    virtual StateResult update(StateContext& context) = 0;
 
     // 状態に入るときの処理（起動や初期化など）
-    virtual void Enter(StateContext& context) {}
+    virtual void enter(StateContext& context) {}
 
     // 状態を出るときの処理（リセットやクリーンアップなど）
-    virtual void Exit(StateContext& context) {}
+    virtual void exit(StateContext& context) {}
 
     // 状態IDの取得
-    virtual const StateID GetStateID() const = 0;
+    virtual const StateID getStateID() const = 0;
 };
 
 #endif /* INC_STATE_INTERFACE_HPP_ */

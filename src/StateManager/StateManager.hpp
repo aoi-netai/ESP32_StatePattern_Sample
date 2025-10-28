@@ -11,7 +11,8 @@
 #include <memory>
 #include "../State/common/StateInterface.hpp"
 #include "../State/common/StateContext.hpp"
-#include "../State/common/StateID.hpp"
+#include "../State/common/StateUtility.hpp"
+#include "LoopManager.hpp"
 
 // 状態管理クラス
 class StateManager {
@@ -19,58 +20,30 @@ class StateManager {
     public:
 
         // コンストラクタ 初期状態を設定
-        StateManager(StateID init_state_id);
+        StateManager(StateID init_state_id, uint32_t loop_interval_us = 100000);
 
         // デストラクタ
         ~StateManager() = default;
             
         // メインループ
-        void Update();
+        void update();
 
     private:
 
         // 状態遷移
-        void ChangeState(std::unique_ptr<StateInterface> newState);
+        void changeState(std::unique_ptr<StateInterface> new_state);
 
         // 状態IDから状態クラスのオブジェクトを生成する関数
-        std::unique_ptr<StateInterface> CreateState(StateID state_id);
+        std::unique_ptr<StateInterface> createState(StateID state_id);
 
         // 現在の状態を保持するポインタ
         std::unique_ptr<StateInterface> current_state;
 
-        // StateContext をオブジェクトとして保持し、各状態処理に参照で渡す
+        // 状態間で共有する構造体
         StateContext state_context;
-};
 
-// ループ管理クラス
-class LoopManager {
-
-    public: 
-        
-        LoopManager() = default;
-        ~LoopManager() = default;
-
-        // 待機フラグのセット
-        void SetWaitFlag(){
-            
-            wait_flag = true; 
-        }
-
-        // 待機フラグのクリア
-        void ClearWaitFlag(){
-
-            wait_flag = false;
-        }
-
-        // 待機フラグの取得
-        bool GetWaitFlag(){ 
-
-            return wait_flag; 
-        }
-
-    private:
-
-        bool wait_flag = false;
+        // ループ管理クラス
+        LoopManager loop_manager; 
 };
 
 #endif // STATE_MANAGER_HPP

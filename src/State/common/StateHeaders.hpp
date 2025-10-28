@@ -16,33 +16,33 @@
 #define STATEHEADERS_HPP
 
 #include "StateInterface.hpp"
-#include "StateID.hpp"
+#include "StateUtility.hpp"
 
 class StateA : public StateInterface {
 
     public:
-        StateID Update(StateContext& context) override;
-        void Enter(StateContext& context) override;
-        void Exit(StateContext& context) override;
-        const StateID GetStateID() const override { return StateID::STATE_A; }
+        StateResult update(StateContext& context) override;
+        void enter(StateContext& context) override;
+        void exit(StateContext& context) override;
+        const StateID getStateID() const override { return StateID::STATE_A; }
 };
 
 class StateB : public StateInterface {
 
     public:
-        StateID Update(StateContext& context) override;
-        void Enter(StateContext& context) override;
-        void Exit(StateContext& context) override;
-        const StateID GetStateID() const override { return StateID::STATE_B; }
+        StateResult update(StateContext& context) override;
+        void enter(StateContext& context) override;
+        void exit(StateContext& context) override;
+        const StateID getStateID() const override { return StateID::STATE_B; }
 };
 
 class StateC : public StateInterface {
 
     public:
-        StateID Update(StateContext& context) override;
-        void Enter(StateContext& context) override;
-        void Exit(StateContext& context) override;
-        const StateID GetStateID() const override { return StateID::STATE_C; }
+        StateResult update(StateContext& context) override;
+        void enter(StateContext& context) override;
+        void exit(StateContext& context) override;
+        const StateID getStateID() const override { return StateID::STATE_C; }
 };
 
 #endif // STATEHEADERS_HPP

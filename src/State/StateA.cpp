@@ -1,6 +1,6 @@
 #include "common/StateHeaders.hpp"
 
-StateID StateA::Update(StateContext& context) {
+StateResult StateA::update(StateContext& context) {
 
     static uint16_t loop_counter = 0;
     loop_counter++;
@@ -10,16 +10,16 @@ StateID StateA::Update(StateContext& context) {
 
         loop_counter = 0;
 
-        return StateID::STATE_B;
+        return {true, StateID::STATE_B, StateError::NONE};
     }
 
-    return StateID::STATE_A;
+    return {false, StateID::STATE_A, StateError::NONE};
 }
 
-void StateA::Enter(StateContext& context) {
+void StateA::enter(StateContext& context) {
 
 }
 
-void StateA::Exit(StateContext& context) {
+void StateA::exit(StateContext& context) {
 
 }
