@@ -15,34 +15,38 @@
 #ifndef STATEHEADERS_HPP
 #define STATEHEADERS_HPP
 
-#include "StateInterface.hpp"
-#include "StateID.hpp"
+#include "StateInterface/StateInterface.hpp"
+#include "StateUtility.hpp"
+#include "StateBase/InitStateBase.hpp"
+#include "StateBase/ProcessStateBase.hpp"
 
-class StateA : public StateInterface {
+#include "../sample_lib/sample_lib.hpp"
 
-    public:
-        StateID Update(StateContext& context) override;
-        void Enter(StateContext& context) override;
-        void Exit(StateContext& context) override;
-        const StateID GetStateID() const override { return StateID::STATE_A; }
+class StateA : public InitStateBase {
+
+    protected:
+        StateResult onUpdate(StateContext& context) override;
+        StateError onEnter(StateContext& context) override;
+        StateError onExit(StateContext& context) override;
+        StateID getStateID() const override { return StateID::STATE_A; }
 };
 
-class StateB : public StateInterface {
+class StateB : public ProcessStateBase {
 
-    public:
-        StateID Update(StateContext& context) override;
-        void Enter(StateContext& context) override;
-        void Exit(StateContext& context) override;
-        const StateID GetStateID() const override { return StateID::STATE_B; }
+    protected:
+        StateResult onUpdate(StateContext& context) override;
+        StateError onEnter(StateContext& context) override;
+        StateError onExit(StateContext& context) override;
+        StateID getStateID() const override { return StateID::STATE_B; }
 };
 
-class StateC : public StateInterface {
+class StateC : public ProcessStateBase {
 
-    public:
-        StateID Update(StateContext& context) override;
-        void Enter(StateContext& context) override;
-        void Exit(StateContext& context) override;
-        const StateID GetStateID() const override { return StateID::STATE_C; }
+    protected:
+        StateResult onUpdate(StateContext& context) override;
+        StateError onEnter(StateContext& context) override;
+        StateError onExit(StateContext& context) override;
+        StateID getStateID() const override { return StateID::STATE_C; }
 };
 
 #endif // STATEHEADERS_HPP

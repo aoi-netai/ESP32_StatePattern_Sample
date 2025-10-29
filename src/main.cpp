@@ -1,52 +1,36 @@
 #include <Arduino.h>
 #include "StateManager/StateManager.hpp"
+#include "StateManager/StateManagerUtility.hpp"
 
 // 状態管理クラスのインスタンスを作成（初期状態を指定する）
-StateManager state_manager(StateID::STATE_A);
-
-// ループ管理クラスのインスタンスを作成
-LoopManager loop_manager;
-
-// ループ管理用のタイマー
-hw_timer_t* timer_10hz = nullptr;
-
-void LoopTimer();
+constexpr unsigned long time_interval = 5000000; // 5000ms(0.2Hz)
+StateManager state_manager(StateID::STATE_A, time_interval);
 
 void setup() {
 
-  // タイマー初期化（80Mhzを1Mhzに分周）
-  timer_10hz = timerBegin(0, 80, true);
+    Serial.begin(115200);
 
-  // タイマーに割り込み関数を設定
-  timerAttachInterrupt(timer_10hz, &LoopTimer, true);
+    while(!Serial); // シリアルポートの接続を待つ
 
-  // 1Mhzのカウント * 100000回 = 10hz
-  timerAlarmWrite(timer_10hz, 100000, true);
-
-  // タイマーの有効化
-  timerAlarmEnable(timer_10hz);
+    printf("[Main] Setup complete. Starting StateManager...\n");
 
 }
 
-// StateManagerの呼び出し
-// 呼び出し時に待機フラグが立つため、実際の実行速度はフラグの更新速度 = LoopTimerの更新速度（10hz)
 void loop() {
 
-  // 待機フラグの確認
-  if (loop_manager.GetWaitFlag() == false) {
-
-    // フラグをセット
-    loop_manager.SetWaitFlag();
-
     // StateManagerの更新
-    state_manager.Update();
-  }
-}
+    StateManagerStatus status = state_manager.update();
 
-// 10Hzで呼び出されるタイマー割り込み関数
-// 高速なIRAM上に配置する
-void IRAM_ATTR LoopTimer(){
+    // 致命的エラーの判定
+    if (isCritical(status)) {
 
-  // 待機フラグのクリア
-  loop_manager.ClearWaitFlag();
+        printf("[Main] CRITICAL ERROR: %s\n", StateManagerStatusToString(status));
+        return; 
+    }
+
+    // 警告の判定
+    if (isWarning(status)) {
+
+        printf("[Main] WARNING: %s\n", StateManagerStatusToString(status));
+    }
 }

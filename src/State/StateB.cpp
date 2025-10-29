@@ -1,25 +1,36 @@
 #include "common/StateHeaders.hpp"
+#include <Arduino.h>
 
-StateID StateB::Update(StateContext& context) {
+StateResult StateB::onUpdate(StateContext& context) {
     
     static uint16_t loop_counter = 0;
     loop_counter++;
 
-    // 10回ループしたら状態をCに変更
-    if (loop_counter > 10) {
+    context.state_change_count++;
+    
+    // SampleLibのデータを取得して確認する
+    context.instances.sample_lib->getData();
+    printf("[StateB] SampleLib Data: %d\n", context.instances.sample_lib->getData());
+
+    if(loop_counter > 2) {
 
         loop_counter = 0;
-        context.state_change_count++;
-
-        return StateID::STATE_C;
+        return {StateChange::STATE_CHANGE, StateID::STATE_C, StateError::NONE};
     }
 
-    return StateID::STATE_B;
+    return {StateChange::NO_STATE_CHANGE, StateID::STATE_B, StateError::NONE};
 }
 
-void StateB::Enter(StateContext& context) {
+StateError StateB::onEnter(StateContext& context) {
 
+    printf("[StateB] Entered State B\n");
+
+    return StateError::NONE;
 }
-void StateB::Exit(StateContext& context) {
 
+StateError StateB::onExit(StateContext& context) {
+
+    printf("[StateB] Exited State B\n");
+
+    return StateError::NONE;
 }
