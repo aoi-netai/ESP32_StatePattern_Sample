@@ -15,9 +15,9 @@ enum class StateError : uint8_t {
 
     NONE = 0,
 
-    // 次のループで再処理を行うべき変化（初期の通信待ち、センサーデータの取得）
+    // 10:199 次のループで再処理を行うべき変化（初期の通信待ち、センサーデータの取得）
 
-    // 処理を停止すべきエラー(Nullptr参照、センサー異常など)
+    // 200:255 処理を停止すべきエラー(Nullptr参照、センサー異常など)
     SOME_CRITICAL_ERROR = 200,
     SAMPLE_LIB_NULLPTR_ERROR = 201,
 };

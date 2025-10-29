@@ -5,6 +5,7 @@
 
 // StateManager の状態を表す enum
 enum class StateManagerStatus : uint8_t {
+
     // 正常系
     SUCCESS = 0,                           // ✅ 正常に処理完了
     WAIT_NEXT_LOOP = 1,                    // ⏸️ 次のループまで待機中
