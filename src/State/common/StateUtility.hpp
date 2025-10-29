@@ -12,16 +12,26 @@ enum class StateID : uint8_t {
 
 // 状態エラーの定義
 enum class StateError : uint8_t {
+
     NONE = 0,
-    ERROR_A,
-    ERROR_B,
-    ERROR_C,
+
+    // 次のループで再処理を行うべき変化（初期の通信待ち、センサーデータの取得）
+
+    // 処理を停止すべきエラー(Nullptr参照、センサー異常など)
+    SOME_CRITICAL_ERROR = 200,
+    SAMPLE_LIB_NULLPTR_ERROR = 201,
+};
+
+enum class StateChange : uint8_t {
+
+    NO_STATE_CHANGE = 0,
+    STATE_CHANGE = 1,
 };
 
 // 状態更新の結果を格納する構造体
-struct StateResult{
+struct StateResult {
 
-    bool is_state_changed = false;  
+    StateChange state_change = StateChange::NO_STATE_CHANGE;
     StateID next_state;
     StateError error;
 };

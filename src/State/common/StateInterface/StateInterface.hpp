@@ -12,8 +12,8 @@
 #ifndef INC_STATE_INTERFACE_HPP_
 #define INC_STATE_INTERFACE_HPP_
 
-#include "StateUtility.hpp"
-#include "StateContext.hpp"
+#include "../StateUtility.hpp"
+#include "../StateContext.hpp"
 
 class StateManager;
 
@@ -22,19 +22,19 @@ class StateInterface {
 
     public:
 
-    virtual ~StateInterface() = default;
+        virtual ~StateInterface() = default;
 
-    // 状態更新用
-    virtual StateResult update(StateContext& context) = 0;
+        // 状態更新用
+        virtual StateResult update(StateContext& context) = 0;
 
-    // 状態に入るときの処理（起動や初期化など）
-    virtual void enter(StateContext& context) {}
+        // 状態に入るときの処理（起動や初期化など）
+        virtual StateError enter(StateContext& context) = 0;
 
-    // 状態を出るときの処理（リセットやクリーンアップなど）
-    virtual void exit(StateContext& context) {}
+        // 状態を出るときの処理（リセットやクリーンアップなど）
+        virtual StateError exit(StateContext& context) = 0;
 
-    // 状態IDの取得
-    virtual const StateID getStateID() const = 0;
+        // 状態IDの取得
+        virtual StateID getStateID() const = 0;
 };
 
 #endif /* INC_STATE_INTERFACE_HPP_ */

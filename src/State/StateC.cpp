@@ -1,26 +1,35 @@
 #include "common/StateHeaders.hpp"
+#include <Arduino.h>
 
-StateResult StateC::update(StateContext& context) {
+StateResult StateC::onUpdate(StateContext& context) {
 
     static uint16_t loop_counter = 0;
     loop_counter++;
 
-    // 10回ループしたら状態をAに変更
-    if (loop_counter > 10) {
+    // 50回ループしたら状態をBに変更
+    if (loop_counter > 50) {
 
         loop_counter = 0;
         context.state_change_count++;
 
-        return {true, StateID::STATE_B, StateError::NONE};
+        printf("[StateC] Current_Loop: %d\n", loop_counter);
+
+        return {StateChange::STATE_CHANGE, StateID::STATE_B, StateError::NONE};
     }
 
-    return {false, StateID::STATE_C, StateError::NONE};
+    return {StateChange::NO_STATE_CHANGE, StateID::STATE_C, StateError::NONE};
 }
 
-void StateC::enter(StateContext& context) {
+StateError StateC::onEnter(StateContext& context) {
+
+    Serial.println("[StateC] Entered State C");
+
+    return StateError::NONE;
 }
 
+StateError StateC::onExit(StateContext& context) {
 
-void StateC::exit(StateContext& context) {
+    Serial.println("[StateC] Exited State C");
 
+    return StateError::NONE;
 }

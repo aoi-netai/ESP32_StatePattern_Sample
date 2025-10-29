@@ -9,7 +9,7 @@
 #define STATE_MANAGER_HPP
 
 #include <memory>
-#include "../State/common/StateInterface.hpp"
+#include "../State/common/StateInterface/StateInterface.hpp"
 #include "../State/common/StateContext.hpp"
 #include "../State/common/StateUtility.hpp"
 #include "LoopManager.hpp"

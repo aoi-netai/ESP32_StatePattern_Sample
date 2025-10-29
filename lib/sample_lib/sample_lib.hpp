@@ -10,19 +10,11 @@ class SampleLib {
         SampleLib(uint8_t init_data);
 
         uint8_t initialize();
-        uint8_t checkStatus();
-        uint8_t config(uint8_t config_value);
-
-        void setData(uint8_t new_data);
         uint8_t getData() const;
 
     private:
 
-        uint8_t sampleData;
-        uint8_t status;
-        uint8_t configValue;
+        uint8_t sample_data = 0;
 };
-
-
 
 #endif  // SAMPLE_LIB_HPP

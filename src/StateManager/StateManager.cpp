@@ -58,7 +58,7 @@ void StateManager::update() {
 	StateResult result = current_state->update(state_context);
 
 	// 状態遷移が発生した場合
-	if (result.is_state_changed) {
+	if (result.state_change == StateChange::STATE_CHANGE) {
 
 		// 状態を変更
 		changeState(createState(result.next_state));
