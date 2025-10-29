@@ -40,18 +40,18 @@ void StateManager::changeState(std::unique_ptr<StateInterface> new_state) {
 }
 
 // メインループの更新処理
-void StateManager::update() {
+StateManagerStatus StateManager::update() {
 
 	// ポインタが無効な場合は処理しない
 	if(!current_state) {
 
-		return;
+		return StateManagerStatus::CRITICAL_NULL_STATE;
 	}
 
 	// 次ループまでの待機が必要な場合はスキップ
 	if(loop_manager.isWaitNextLoop()) {
 
-		return;
+		return StateManagerStatus::WAIT_NEXT_LOOP;
 	}
 
 	// 現在状態の更新処理
@@ -63,6 +63,8 @@ void StateManager::update() {
 		// 状態を変更
 		changeState(createState(result.next_state));
 	}
+
+	return StateManagerStatus::SUCCESS;
 }
 
 // 状態IDから状態クラスのオブジェクトを生成

@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "StateManager/StateManager.hpp"
+#include "StateManager/StateManagerUtility.hpp"
 
 // 状態管理クラスのインスタンスを作成（初期状態を指定する）
 constexpr unsigned long time_interval = 100000; // 100ms(10Hz)
@@ -18,5 +19,18 @@ void setup() {
 void loop() {
 
     // StateManagerの更新
-    state_manager.update();
+    StateManagerStatus status = state_manager.update();
+
+    // 致命的エラーの判定
+    if (isCritical(status)) {
+
+        printf("[Main] CRITICAL ERROR: %s\n", StateManagerStatusToString(status));
+        return; 
+    }
+
+    // 警告の判定
+    if (isWarning(status)) {
+
+        printf("[Main] WARNING: %s\n", StateManagerStatusToString(status));
+    }
 }

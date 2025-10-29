@@ -13,6 +13,7 @@
 #include "../State/common/StateContext.hpp"
 #include "../State/common/StateUtility.hpp"
 #include "LoopManager.hpp"
+#include "StateManagerUtility.hpp"
 
 // 状態管理クラス
 class StateManager {
@@ -26,7 +27,7 @@ class StateManager {
         ~StateManager() = default;
             
         // メインループ
-        void update();
+        StateManagerStatus update();
 
     private:
 
