@@ -23,14 +23,14 @@ StateResult StateB::onUpdate(StateContext& context) {
 
 StateError StateB::onEnter(StateContext& context) {
 
-    Serial.println("[StateB] Entered State B");
+    printf("[StateB] Entered State B\n");
 
     return StateError::NONE;
 }
 
 StateError StateB::onExit(StateContext& context) {
 
-    Serial.println("[StateB] Exited State B");
+    printf("[StateB] Exited State B\n");
 
     return StateError::NONE;
 }
