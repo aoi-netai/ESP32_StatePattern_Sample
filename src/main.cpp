@@ -3,16 +3,16 @@
 #include "StateManager/StateManagerUtility.hpp"
 
 // 状態管理クラスのインスタンスを作成（初期状態を指定する）
-constexpr unsigned long time_interval = 100000; // 100ms(10Hz)
+constexpr unsigned long time_interval = 5000000; // 5000ms(0.2Hz)
 StateManager state_manager(StateID::STATE_A, time_interval);
 
 void setup() {
 
-  while(!Serial); // シリアルポートの接続を待つ
+    Serial.begin(115200);
 
-  Serial.begin(115200);
+    while(!Serial); // シリアルポートの接続を待つ
 
-  printf("[Main] Setup complete. Starting StateManager...\n");
+    printf("[Main] Setup complete. Starting StateManager...\n");
 
 }
 

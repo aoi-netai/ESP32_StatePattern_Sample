@@ -36,6 +36,7 @@ void StateManager::changeState(std::unique_ptr<StateInterface> new_state) {
 		// 状態遷移メッセージの出力(デバッグ用)
 		// 状態遷移カウントと遷移先の状態を表示
 		printf("[StateManager] StateChange[%d]: %d\n", state_context.state_change_count, static_cast<int>(current_state->getStateID()));
+
 	}
 }
 
@@ -63,6 +64,9 @@ StateManagerStatus StateManager::update() {
 		// 状態を変更
 		changeState(createState(result.next_state));
 	}
+
+	// デバッグ用: 区切り線の表示
+	printf("----------------------------------------\n");
 
 	return StateManagerStatus::SUCCESS;
 }

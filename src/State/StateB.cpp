@@ -6,16 +6,15 @@ StateResult StateB::onUpdate(StateContext& context) {
     static uint16_t loop_counter = 0;
     loop_counter++;
 
-    // 5回ループしたら状態をCに変更
-    if (loop_counter > 5) {
+    context.state_change_count++;
+    
+    // SampleLibのデータを取得して確認する
+    context.instances.sample_lib->getData();
+    printf("[StateB] SampleLib Data: %d\n", context.instances.sample_lib->getData());
+
+    if(loop_counter > 2) {
 
         loop_counter = 0;
-        context.state_change_count++;
-        
-        // SampleLibのデータを取得して確認する
-        context.instances.sample_lib->getData();
-        printf("[StateB] Current_Loop: %d, SampleLib Data: %d\n", loop_counter, context.instances.sample_lib->getData());
-
         return {StateChange::STATE_CHANGE, StateID::STATE_C, StateError::NONE};
     }
 

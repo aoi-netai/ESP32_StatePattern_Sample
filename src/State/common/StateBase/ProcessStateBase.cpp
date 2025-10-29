@@ -17,6 +17,5 @@ StateResult ProcessStateBase::update(StateContext& context) {
 StateError ProcessStateBase::exit(StateContext& context) {
 
     Serial.printf("[ProcessStateBase] Exiting State ID: %d\n", static_cast<int>(getStateID()));
-
     return onExit(context);
 }
